@@ -1,6 +1,6 @@
-# flutter_application_1
+# Flutter TDD
 
-A new Flutter project.
+Sample project practice base on tutorial by Reso Coder.
 
 ## Getting Started
 
