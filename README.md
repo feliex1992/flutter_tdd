@@ -1,6 +1,6 @@
 # Flutter TDD
 
-Sample project practice base on tutorial by Reso Coder.
+This is a project for flutter practice, using TDD method and implementing a clean architecture, I follow this awesome guide by [Reso Coder](https://resocoder.com/).
 
 ## Getting Started
 
