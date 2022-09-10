@@ -10,18 +10,20 @@ import 'get_concrete_number_trivia_test.mocks.dart';
 
 @GenerateMocks([NumberTriviaRepository])
 void main() {
-  GetConcreteNumberTrivia usecase;
-  MockNumberTriviaRepository mockNumberTriviaRepository;
+  late GetConcreteNumberTrivia usecase;
+  late MockNumberTriviaRepository mockNumberTriviaRepository;
 
   final tNumber = 1;
   final tNumberTrivia = NumberTrivia(number: 1, text: 'test');
 
+  setUp(() {
+    mockNumberTriviaRepository = MockNumberTriviaRepository();
+    usecase = GetConcreteNumberTrivia(mockNumberTriviaRepository);
+  });
+
   test(
     'should get trivia for the number from the repository',
     () async {
-      mockNumberTriviaRepository = MockNumberTriviaRepository();
-      usecase = GetConcreteNumberTrivia(mockNumberTriviaRepository);
-
       // arrange
       when(mockNumberTriviaRepository.getConcreteNumberTrivia(tNumber))
           .thenAnswer((_) async => Right(tNumberTrivia));

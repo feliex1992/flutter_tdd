@@ -11,17 +11,19 @@ import 'get_random_number_trivia_test.mocks.dart';
 
 @GenerateMocks([NumberTriviaRepository])
 void main() {
-  GetRandomNumberTrivia usecase;
-  MockNumberTriviaRepository mockNumberTriviaRepository;
+  late GetRandomNumberTrivia usecase;
+  late MockNumberTriviaRepository mockNumberTriviaRepository;
 
   final tNumberTrivia = NumberTrivia(number: 1, text: 'test');
+
+  setUp(() {
+    mockNumberTriviaRepository = MockNumberTriviaRepository();
+    usecase = GetRandomNumberTrivia(mockNumberTriviaRepository);
+  });
 
   test(
     'should get trivia from the repository',
     () async {
-      mockNumberTriviaRepository = MockNumberTriviaRepository();
-      usecase = GetRandomNumberTrivia(mockNumberTriviaRepository);
-
       // arrange
       when(mockNumberTriviaRepository.getRandomNumberTrivia())
           .thenAnswer((_) async => Right(tNumberTrivia));
