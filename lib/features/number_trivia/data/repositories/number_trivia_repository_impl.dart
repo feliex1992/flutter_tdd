@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_application_1/core/error/exception.dart';
-import 'package:flutter_application_1/core/platform/network_info.dart';
-import 'package:flutter_application_1/features/number_trivia/data/datasources/number_trivia_local_data_source.dart';
-import 'package:flutter_application_1/features/number_trivia/data/datasources/number_trivia_remote_data_source.dart';
-import 'package:flutter_application_1/features/number_trivia/data/models/number_trivia_model.dart';
+import '../../../../core/error/exception.dart';
+import '../../../../core/platform/network_info.dart';
+import '../datasources/number_trivia_local_data_source.dart';
+import '../datasources/number_trivia_remote_data_source.dart';
+import '../models/number_trivia_model.dart';
 
 import '../../../../core/error/failures.dart';
 import '../../domain/entities/number_trivia.dart';
