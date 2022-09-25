@@ -1,13 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_application_1/core/error/failures.dart';
-import 'package:flutter_application_1/core/usecases/usecase.dart';
-import 'package:flutter_application_1/core/util/input_converter.dart';
-import 'package:flutter_application_1/features/number_trivia/data/models/number_trivia_model.dart';
-import 'package:flutter_application_1/features/number_trivia/domain/entities/number_trivia.dart';
-import 'package:flutter_application_1/features/number_trivia/domain/usecases/get_concrete_number_trivia.dart';
-import 'package:flutter_application_1/features/number_trivia/domain/usecases/get_random_number_trivia.dart';
+import '../../../../core/error/failures.dart';
+import '../../../../core/usecases/usecase.dart';
+import '../../../../core/util/input_converter.dart';
+import '../../domain/entities/number_trivia.dart';
+import '../../domain/usecases/get_concrete_number_trivia.dart';
+import '../../domain/usecases/get_random_number_trivia.dart';
 
 part 'number_trivia_event.dart';
 part 'number_trivia_state.dart';
@@ -37,9 +36,10 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
   ) async {
     final inputEither =
         inputConverter.stringToUnsignedInteger(event.numberString);
-    inputEither.fold(
-      (Failure failure) =>
-          emit(const Error(message: invalidInputFailureMessage)),
+    await inputEither.fold(
+      (Failure failure) {
+        emit(const Error(message: invalidInputFailureMessage));
+      },
       (int number) async {
         await _getTriviaConcreteOrRandom(
           emit,
@@ -65,11 +65,13 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
           _getConcreteOrRandom) async {
     emit(Loading());
     final failureOrTrivia = await _getConcreteOrRandom();
-    failureOrTrivia.fold((failure) {
+    await failureOrTrivia.fold((failure) {
       emit(Error(
         message: _mapFailureToMessage(failure),
       ));
-    }, (trivia) => emit(Loaded(trivia: trivia)));
+    }, (trivia) {
+      emit(Loaded(trivia: trivia));
+    });
   }
 
   String _mapFailureToMessage(Failure failure) {

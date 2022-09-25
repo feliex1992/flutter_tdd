@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_application_1/core/error/failures.dart';
+
+import '../error/failures.dart';
 
 class InputConverter {
   Either<Failure, int> stringToUnsignedInteger(String str) {

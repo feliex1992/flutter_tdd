@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
-void main() {
+import 'features/number_trivia/presentation/pages/number_trivia_page.dart';
+import 'injection_container.dart' as di;
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await di.init();
   runApp(const MyApp());
 }
 
@@ -9,13 +15,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = ThemeData();
     return MaterialApp(
-      title: 'Seed DDD',
-      theme: ThemeData(
-        primaryColor: Colors.amber,
-        accentColor: Colors.amberAccent,
-      ),
-      home: const Text('Flutter Architecture inspired by Domain Driven Design'),
+      title: 'Number Trivia',
+      theme: theme.copyWith(
+          colorScheme: theme.colorScheme.copyWith(
+        primary: Colors.green.shade800,
+        secondary: Colors.green.shade600,
+      )),
+      home: const NumberTriviaPage(),
     );
   }
 }
